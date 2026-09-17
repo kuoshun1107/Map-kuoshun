@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>聲波監測器｜0–22 kHz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header>
+        <div class="brand"><span class="brand-mark">∿</span><span>SONAR</span><small>聲波監測器</small></div>
+        <div class="status" id="status"><i></i><span>等待麥克風</span></div>
+      </header>
+      <section class="hero">
+        <div>
+          <p class="eyebrow">LIVE AUDIO ANALYSIS</p>
+          <h1>看見每一段聲音</h1>
+          <p class="subhead">即時監測 0–22 kHz 聲波，放大細微訊號並保留硬體實際量測範圍。</p>
+        </div>
+        <div class="readout"><span>INPUT LEVEL</span><strong id="levelText">−∞ <em>dB</em></strong><div class="meter"><b id="meterFill"></b></div></div>
+      </section>
+      <section class="control-panel">
+        <label class="device-control">
+          <span>收音裝置</span>
+          <select id="deviceSelect"><option value="">正在尋找麥克風…</option></select>
+        </label>
+        <label class="gain-control">
+          <span>麥克風增益 <output id="gainValue">1.0×</output></span>
+          <input id="gainSlider" type="range" min="0" max="30" step="0.5" value="1" />
+          <small>提高增益能讓微弱聲音更清楚，也可能造成削波與底噪。</small>
+        </label>
+        <button id="toggleButton" type="button"><span class="button-dot"></span>開始監測</button>
+      </section>
+      <section class="charts">
+        <article class="chart-card spectrum-card">
+          <div class="card-heading"><div><p>FREQUENCY SPECTRUM</p><h2>頻率頻譜</h2></div><span id="rangeText">0 – 22.0 kHz</span></div>
+          <div class="canvas-wrap"><canvas id="spectrumCanvas"></canvas><div class="axis freq-axis"><span>0</span><span>5k</span><span>10k</span><span>15k</span><span>20k</span><span>22k Hz</span></div><div class="axis db-axis"><span>0 dB</span><span>−40</span><span>−80</span></div></div>
+        </article>
+        <article class="chart-card waveform-card">
+          <div class="card-heading"><div><p>WAVEFORM</p><h2>即時波形</h2></div><span id="sampleText">— kHz sampling</span></div>
+          <div class="canvas-wrap"><canvas id="waveCanvas"></canvas><div class="axis time-axis"><span>−46 ms</span><span>−23 ms</span><span>NOW</span></div></div>
+        </article>
+      </section>
+      <footer><span>分析範圍會受麥克風、作業系統與瀏覽器取樣率限制。</span><span id="hardwareText">尚未連接音訊裝置</span></footer>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
